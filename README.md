@@ -10,21 +10,26 @@ Go.
 ## Usage
 
 ```go
-    package main
+package main
 
-    import (
-        "fmt"
-        "github.com/anmitsu/go-shlex"
-    )
+import (
+    "fmt"
+    "log"
 
-    func main() {
-        cmd := `cp -Rdp "file name" 'file name2' dir\ name`
-        words, _ := shlex.Split(cmd, true)
-    
-        for _, w := range words {
-            fmt.Println(w)
-        }
+    "github.com/anmitsu/go-shlex"
+)
+
+func main() {
+    cmd := `cp -Rdp "file name" 'file name2' dir\ name`
+    words, err := shlex.Split(cmd, true)
+    if err != nil {
+        log.Fatal(err)
     }
+
+    for _, w := range words {
+        fmt.Println(w)
+    }
+}
 ```
 
 ## Documentation

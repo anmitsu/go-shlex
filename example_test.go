@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/anmitsu/go-shlex"
-	flynn_shlex "github.com/flynn/go-shlex"
 )
 
 func ExampleSplit() {
@@ -54,47 +53,4 @@ func ExampleSplit() {
 	// 'file name2'
 	// dir\
 	// name
-}
-
-func ExampleSplit_compareFlynn() {
-	cmd := `English and 日本語`
-
-	// Split for github.com/flynn/go-shlex imported as flynn_shlex
-	words_flynn, err1 := flynn_shlex.Split(cmd)
-
-	// Split for github.com/anmitsu/go-shlex
-	words_anmitsu, err2 := shlex.Split(cmd, true)
-
-	fmt.Println("Source string:")
-	fmt.Println(cmd)
-	fmt.Println()
-
-	fmt.Println("Result of github.com/flynn/go-shlex:")
-	for _, word := range words_flynn {
-		fmt.Println(word)
-	}
-	fmt.Println(err1.Error())
-
-	fmt.Println()
-	fmt.Println("Result of github.com/anmitsu/go-shlex:")
-	for _, word := range words_anmitsu {
-		fmt.Println(word)
-	}
-	if err2 != nil {
-		fmt.Println(err2.Error())
-	}
-
-	// Output:
-	// Source string:
-	// English and 日本語
-	//
-	// Result of github.com/flynn/go-shlex:
-	// English
-	// and
-	// Unknown rune: 26085
-	//
-	// Result of github.com/anmitsu/go-shlex:
-	// English
-	// and
-	// 日本語
 }
